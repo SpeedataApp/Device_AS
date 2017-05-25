@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+    defaultConfig {
+        applicationId "com.speedata.device"
+        minSdkVersion 17
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.1"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+//    greendao {
+//        schemaVersion 1
+//        daoPackage 'com.zgl.greentest.gen'
+//        targetGenDir 'src/main/java'
+//    }
+    greendao{
+        schemaVersion 1
+        targetGenDir 'src/main/java'
+    }
+    signingConfigs {
+        release {
+            storeFile file("myreleasekey.keystore")
+            storePassword "speedata"
+            keyAlias "speedata"
+            keyPassword "speedata"
+            v2SigningEnabled false
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.speedata:deivice:1.4.4'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:design:25.0.1'
+    compile 'xyz.reginer:refresh:1.0.5'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'xyz.reginer.baseadapter:baseadapter:1.1.2'
+    testCompile 'junit:junit:4.12'
+    compile 'org.greenrobot:greendao:3.2.0'
+}
+
